@@ -1,0 +1,19 @@
+Model Changes
+Add a stack data structure to store recently removed transactions
+Implement a method to record removed transactions in this history structure
+Create a method to retrieve the most recently removed transaction
+
+View Changes
+Add row selection capability to the transactions table
+Implement a "Remove" button that becomes active when a transaction is selected
+Add an "Undo" button that is enabled only when there are transactions that can be restored
+Include visual feedback (tooltip, status message) to confirm removal and restoration
+Update the UI refresh logic to properly display the current state after undo operations
+
+Controller Changes
+Create an event handler for the transaction removal action
+Implement logic to remove the selected transaction and store it in the history
+Add an event handler for the undo button that retrieves the last removed transaction
+Ensure the model's transaction list is properly updated during remove/undo operations
+Maintain proper validation and error handling during the undo process
+Update the Total Cost calculation after each remove or undo operation
