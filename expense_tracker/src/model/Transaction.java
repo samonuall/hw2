@@ -3,7 +3,7 @@ package model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
+public final class Transaction {
 
   private final double amount;
   private final String category;
