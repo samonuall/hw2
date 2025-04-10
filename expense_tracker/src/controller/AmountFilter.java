@@ -5,8 +5,8 @@ import model.Transaction;
 import java.util.List;
 
 public class AmountFilter implements TransactionFilter {
-    private double minAmount;
-    private double maxAmount;
+    private final double minAmount;
+    private final double maxAmount;
 
     public AmountFilter(double minAmount, double maxAmount) {
         this.minAmount = minAmount;
@@ -16,11 +16,12 @@ public class AmountFilter implements TransactionFilter {
     @Override
     public List<Transaction> filter(List<Transaction> transactions) {
         List<Transaction> result = new ArrayList<>();
-        for (Transaction transaction : transactions) {
-            if (transaction.getAmount() >= minAmount && transaction.getAmount() <= maxAmount) {
-                result.add(transaction);
+            for (Transaction transaction : transactions) {
+                double amount = transaction.getAmount();
+                if (amount >= minAmount && amount <= maxAmount) {
+                    result.add(transaction);
+                }
             }
-        }
         return result;
     }
 }

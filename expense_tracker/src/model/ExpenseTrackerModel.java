@@ -13,8 +13,8 @@ public class ExpenseTrackerModel {
   }
 
   public void addTransaction(Transaction t) {
-        if (transaction != null) {
-            transactions.add(transaction);
+        if (t!= null) {
+            transactions.add(t);
         }
   }
 

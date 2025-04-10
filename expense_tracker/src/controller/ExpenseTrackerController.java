@@ -19,22 +19,29 @@ public class ExpenseTrackerController {
     this.model = model;
     this.view = view;
     
-    // Add filter listener
+     // Add filter listener
     view.getApplyFilterBtn().addActionListener(e -> {
-      // check for invalid filters
-      String categoryFilter = view.getCategoryFilterValue();
-      double minAmount = view.getMinAmountFilter();
-      double maxAmount = view.getMaxAmountFilter();
-      if (categoryFilter.length() > 0 && !InputValidation.isValidCategory(view.getCategoryFilterValue())) {
-        JOptionPane.showMessageDialog(view, "Invalid category filter entered.");
-        view.toFront();
-      } else if (minAmount > maxAmount) {
-        JOptionPane.showMessageDialog(view, "Invalid amount filter entered.");
-        view.toFront();
-      } else if (!InputValidation.isValidAmount(minAmount) || !InputValidation.isValidAmount(maxAmount)) {
-        JOptionPane.showMessageDialog(view, "Invalid amount filter entered.");
-        view.toFront();
+      String selectedFilter = view.getSelectedFilter();
+
+      if ("category".equals(selectedFilter)) {
+        String category = view.getCategoryFilterValue();
+        if (!InputValidation.isValidCategory(category)) {
+          JOptionPane.showMessageDialog(view, "Invalid category filter entered.");
+          view.toFront();
+          return;
+        }
+      } else if ("amount".equals(selectedFilter)) {
+        double minAmount = view.getMinAmountFilter();
+        double maxAmount = view.getMaxAmountFilter();
+        if (minAmount > maxAmount ||
+            !InputValidation.isValidAmount(minAmount) ||
+            !InputValidation.isValidAmount(maxAmount)) {
+          JOptionPane.showMessageDialog(view, "Invalid amount filter entered.");
+          view.toFront();
+          return;
+        }
       }
+
       refresh();
     });
   }
